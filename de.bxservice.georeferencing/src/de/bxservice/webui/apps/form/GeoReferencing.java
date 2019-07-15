@@ -42,12 +42,19 @@ public class GeoReferencing {
 	protected int windowNo = 0;
 	private MBXSGeoreferencing geoConfiguration;
 	
-	public void setMap(int BXS_Georeferencing_ID) {
+	protected void setMap(int BXS_Georeferencing_ID) {
 		if (BXS_Georeferencing_ID==-1)
 			geoConfiguration = null;
 		else if (geoConfiguration == null || BXS_Georeferencing_ID != geoConfiguration.get_ID()) {
 			geoConfiguration = new MBXSGeoreferencing(Env.getCtx(), BXS_Georeferencing_ID, null);
 		}
+	}
+	
+	protected void setMap(MBXSGeoreferencing geoConfiguration) {
+		if (this.geoConfiguration != null)
+			this.geoConfiguration = null;
+
+		this.geoConfiguration = geoConfiguration;
 	}
 	
 	public KeyNamePair[] getGeoMapList() {
