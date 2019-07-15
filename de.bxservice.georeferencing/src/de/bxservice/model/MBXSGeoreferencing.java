@@ -52,6 +52,7 @@ public class MBXSGeoreferencing extends X_BXS_Georeferencing {
 	private static final long serialVersionUID = 5797052750265743254L;
 	
 	private List<MBXSMarker> mapMarkers;
+	private String additionalWhereClause;
 	
 	public MBXSGeoreferencing(Properties ctx, int BXS_Georeferencing_ID, String trxName) {
 		super(ctx, BXS_Georeferencing_ID, trxName);
@@ -62,13 +63,9 @@ public class MBXSGeoreferencing extends X_BXS_Georeferencing {
 	}
 
 	public List<MBXSMarker> getMapMarkers() {
-		return getMapMarkers(null);
-	}
-	
-	public List<MBXSMarker> getMapMarkers(String additionalWhereClause) {
 		if (mapMarkers == null || mapMarkers.isEmpty()) {
 			mapMarkers = new ArrayList<>();
-			String sql = getSQL(additionalWhereClause);
+			String sql = getSQL();
 			
 			PreparedStatement pstmt = null;
 	        ResultSet rs = null;
@@ -139,12 +136,7 @@ public class MBXSGeoreferencing extends X_BXS_Georeferencing {
 		this.mapMarkers = mapMarkers;
 	}
 	
-	/**
-	 * 
-	 * @param additionalWhereClause optional - defines an additional where condition (Do not include the WHERE word)
-	 * @return A SQL String with AD_Client_ID as parameter to be replace
-	 */
-	private String getSQL(String additionalWhereClause) {
+	private String getSQL() {
 		StringBuilder sql = new StringBuilder();
 
 		AccessSqlParser sqlParser = new AccessSqlParser("SELECT * FROM " + getFromClause());
@@ -276,4 +268,13 @@ public class MBXSGeoreferencing extends X_BXS_Georeferencing {
 		
 		return true;
 	}
+
+	public String getAdditionalWhereClause() {
+		return additionalWhereClause;
+	}
+
+	public void setAdditionalWhereClause(String additionalWhereClause) {
+		this.additionalWhereClause = additionalWhereClause;
+	}
+	
 }

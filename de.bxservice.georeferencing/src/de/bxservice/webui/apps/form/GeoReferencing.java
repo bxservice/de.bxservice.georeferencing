@@ -43,9 +43,10 @@ public class GeoReferencing {
 	private MBXSGeoreferencing geoConfiguration;
 	
 	protected void setMap(int BXS_Georeferencing_ID) {
-		if (BXS_Georeferencing_ID==-1)
-			geoConfiguration = null;
-		else if (geoConfiguration == null || BXS_Georeferencing_ID != geoConfiguration.get_ID()) {
+		//Same Map -> refresh markers
+		if (geoConfiguration != null && BXS_Georeferencing_ID == geoConfiguration.get_ID()) {
+			geoConfiguration.setMapMarkers(null);
+		} else if (geoConfiguration == null || BXS_Georeferencing_ID != geoConfiguration.get_ID()) {
 			geoConfiguration = new MBXSGeoreferencing(Env.getCtx(), BXS_Georeferencing_ID, null);
 		}
 	}

@@ -150,7 +150,7 @@ public class WGeoreferencingMap extends GeoReferencing implements IFormControlle
 	}
 
 	private void refresh() {
-		setMap(-1);
+		setMap(BXS_Georeferencing_ID);
 		repaintMap();
 	}
 	
@@ -172,7 +172,8 @@ public class WGeoreferencingMap extends GeoReferencing implements IFormControlle
 					BXS_Georeferencing_ID = geoMap.getKey();
 				refresh();
 			}
-		}
+		} else if (Events.ON_CLICK.equals(event.getName()) && event.getTarget() instanceof Button) 
+			refresh();
 	}
 	
 	/**
