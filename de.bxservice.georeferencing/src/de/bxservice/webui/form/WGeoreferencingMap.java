@@ -47,6 +47,7 @@ import org.zkoss.zul.Iframe;
 import org.zkoss.zul.North;
 import org.zkoss.zul.South;
 
+import de.bxservice.model.MBXSGeoreferencing;
 import de.bxservice.webui.apps.form.GeoReferencing;
 
 
@@ -116,7 +117,7 @@ public class WGeoreferencingMap extends GeoReferencing implements IFormControlle
 
 		northPanelHbox = new Hbox();
 		northPanelHbox.appendChild(lMaps.rightAlign());
-		northPanelHbox.appendChild(mapsCombobox);
+		northPanelHbox.appendChild(mapsCombobox);			
 		northPanelHbox.appendChild(bRefresh);
 		northPanelHbox.setHflex("1");
 		northPanelHbox.setStyle("padding: 5px; border-style: double; border-width: 0px 0px 1px; border-color: black;");
@@ -143,20 +144,10 @@ public class WGeoreferencingMap extends GeoReferencing implements IFormControlle
 		markersMap = new Iframe();
 
 		if (BXS_Georeferencing_ID != -1) {
-
 			setMap(BXS_Georeferencing_ID);
-			markersMap.setWidth("100%");
-			markersMap.setHeight("100%");
-
-			AMedia media = new AMedia("Help", "html", "text/html", getHTMLCode().getBytes());
-			markersMap.setContent(media);
+			setContent(getHTMLCode());
 		}
 	}
-
-	/*@Override
-	public Mode getWindowMode() {
-		return Mode.EMBEDDED;
-	}*/
 
 	private void refresh() {
 		setMap(-1);
@@ -182,6 +173,28 @@ public class WGeoreferencingMap extends GeoReferencing implements IFormControlle
 				refresh();
 			}
 		}
+	}
+	
+	/**
+	 * If the configuration is set directly, f.e. from a process
+	 * hide the selection list
+	 * @param geoConfig Geoconfiguration object
+	 */
+	public void setContent(MBXSGeoreferencing geoConfig) {
+		if (geoConfig != null) {
+			setMap(geoConfig);
+			BXS_Georeferencing_ID = geoConfig.getBXS_Georeferencing_ID();
+			lMaps.setVisible(false);
+			mapsCombobox.setVisible(false);
+			setContent(getHTMLCode());
+		}
+	}
+	
+	private void setContent(String htmlCode) {
+		AMedia media = new AMedia("Help", "html", "text/html", htmlCode.getBytes());
+		markersMap.setWidth("100%");
+		markersMap.setHeight("100%");
+		markersMap.setContent(media);
 	}
 	
 	@Override
