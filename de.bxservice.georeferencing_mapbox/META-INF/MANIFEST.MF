@@ -4,7 +4,6 @@ Bundle-Name: Georeferencing_mapbox
 Bundle-SymbolicName: de.bxservice.georeferencing_mapbox;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Automatic-Module-Name: de.bxservice.georeferencing_mapbox
-Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-Activator: org.adempiere.plugin.utils.Incremental2PackActivator
 Require-Bundle: org.adempiere.base;bundle-version="6.2.0",
  org.adempiere.plugin.utils;bundle-version="6.2.0",
@@ -22,3 +21,4 @@ Bundle-ClassPath: libs/converter-gson-2.4.0.jar,
  .
 Service-Component: OSGI-INF/de.bxservice.tools.MapboxHelper.xml
 Import-Package: org.osgi.service.component.annotations;version="1.3.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
