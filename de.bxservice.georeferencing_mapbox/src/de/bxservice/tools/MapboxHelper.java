@@ -83,13 +83,13 @@ public class MapboxHelper extends AbstractGeoreferencingHelper {
 	}
 	
 	@Override
-	public void setLatLong(List<MLocation> locations) {
+	public void setLatLong(List<MLocation> locations, String trxName) {
 		if (locations == null)
 			return;
 		
 		int parsedRecords = 0;
 		for (MLocation location : locations) {
-			setLatLong(location);
+			setLatLong(location, trxName);
 			
 			//To avoid getting a db block, sleep N second every Y records to release the TRX 
 			parsedRecords++;
@@ -105,7 +105,7 @@ public class MapboxHelper extends AbstractGeoreferencingHelper {
 	}
 	
 	@Override
-	public void setLatLong(MLocation location) {
+	public void setLatLong(MLocation location, String trxName) {
 		if (location == null || (location.get_Value("Latitude") != null &&
 				location.get_Value("Longitude") != null))
 			return;
@@ -135,7 +135,7 @@ public class MapboxHelper extends AbstractGeoreferencingHelper {
 
 					location.set_ValueNoCheck("Latitude", String.valueOf(firstResultPoint.latitude()));
 					location.set_ValueNoCheck("Longitude", String.valueOf(firstResultPoint.longitude()));
-					location.saveEx(null);
+					location.saveEx(trxName);
 				}
 			}
 
