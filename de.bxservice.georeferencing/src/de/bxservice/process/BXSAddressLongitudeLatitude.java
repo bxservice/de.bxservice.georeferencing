@@ -67,13 +67,13 @@ public class BXSAddressLongitudeLatitude  extends SvrProcess {
 		IGeoreferencingHelper mapHelper = GeoreferencingHelperFactory.getGeoreferencingHelper(null);
 		if (ordersLocation != null && !ordersLocation.isEmpty()) {
 			if (log.isLoggable(Level.INFO)) log.info("Addresses to set the lat/long = " + ordersLocation.size());
-			mapHelper.setLatLong(ordersLocation);
+			mapHelper.setLatLong(ordersLocation, get_TrxName());
 		}
 
 		if (p_AD_Org_ID > 0) {
 			MOrgInfo org = MOrgInfo.get(getCtx(), p_AD_Org_ID, get_TrxName());
 			MLocation orgloc = MLocation.get(getCtx(), org.getC_Location_ID(), get_TrxName());
-			mapHelper.setLatLong(orgloc);
+			mapHelper.setLatLong(orgloc, get_TrxName());
 		}
 
 		return "@OK@";
