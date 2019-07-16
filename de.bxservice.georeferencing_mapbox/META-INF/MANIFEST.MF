@@ -21,3 +21,4 @@ Bundle-ClassPath: libs/converter-gson-2.4.0.jar,
  libs/retrofit-2.4.0.jar,
  .
 Service-Component: OSGI-INF/de.bxservice.tools.MapboxHelper.xml
+Import-Package: org.osgi.service.component.annotations;version="1.3.0"
