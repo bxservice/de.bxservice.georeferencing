@@ -35,7 +35,7 @@ import org.compiere.util.Env;
 import de.bxservice.tools.GeoreferencingHelperFactory;
 import de.bxservice.tools.IGeoreferencingHelper;
 
-public class BAYAddressLongitudeLatitude  extends SvrProcess {
+public class BXSAddressLongitudeLatitude  extends SvrProcess {
 
 	/** AD_Org_ID					*/
 	private int	p_AD_Org_ID = 0;
