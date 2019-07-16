@@ -32,8 +32,8 @@ import de.bxservice.model.MBXSGeoreferencing;
 import de.bxservice.model.MBXSMarker;
 
 public interface IGeoreferencingHelper {
-	public void setLatLong(List<MLocation> locations, String trxName);
-	public void setLatLong(MLocation location, String trxName);
+	public void setLatLong(List<MLocation> locations);
+	public void setLatLong(MLocation location);
 	public String getMapMarkers();
 	public void setGeoconfiguration(MBXSGeoreferencing geoConfiguration);
 	String getCoordinates(MBXSMarker marker);
