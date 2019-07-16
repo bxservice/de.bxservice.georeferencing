@@ -24,6 +24,8 @@ import org.adempiere.base.IProcessFactory;
 import org.compiere.process.ProcessCall;
 import org.osgi.service.component.annotations.Component;
 
+import de.bxservice.process.BXSAddressLongitudeLatitude;
+
 @Component(
 		property= {"service.ranking:Integer=100"}
 )
@@ -31,8 +33,8 @@ public class GeoreferencingProcessFactory implements IProcessFactory {
 
 	@Override
 	public ProcessCall newProcessInstance(String className) {
-		/*if (BXSAddressLongitudeLatitude.class.getName().equals(className)) 
-				return new BXSAddressLongitudeLatitude();*/
+		if (BXSAddressLongitudeLatitude.class.getName().equals(className)) 
+				return new BXSAddressLongitudeLatitude();
 		return null;
 	}
 }
