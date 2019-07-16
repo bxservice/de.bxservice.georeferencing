@@ -30,6 +30,7 @@ import java.util.logging.Level;
 import org.compiere.model.MCountry;
 import org.compiere.model.MLocation;
 import org.compiere.model.MSysConfig;
+import org.compiere.util.CLogger;
 import org.compiere.util.Env;
 import org.compiere.util.Util;
 import org.osgi.service.component.annotations.Component;
@@ -50,6 +51,9 @@ import retrofit2.Response;
 )
 public class MapboxHelper extends AbstractGeoreferencingHelper {
 	
+	/**	Logger			*/
+	protected CLogger log = CLogger.getCLogger(MapboxHelper.class);
+
 	/**	Mapbox Access Token		*/
 	private String API_KEY = "";
 	
@@ -83,13 +87,13 @@ public class MapboxHelper extends AbstractGeoreferencingHelper {
 	}
 	
 	@Override
-	public void setLatLong(List<MLocation> locations, String trxName) {
+	public void setLatLong(List<MLocation> locations) {
 		if (locations == null)
 			return;
 		
 		int parsedRecords = 0;
 		for (MLocation location : locations) {
-			setLatLong(location, trxName);
+			setLatLong(location);
 			
 			//To avoid getting a db block, sleep N second every Y records to release the TRX 
 			parsedRecords++;
@@ -105,7 +109,7 @@ public class MapboxHelper extends AbstractGeoreferencingHelper {
 	}
 	
 	@Override
-	public void setLatLong(MLocation location, String trxName) {
+	public void setLatLong(MLocation location) {
 		if (location == null || (location.get_Value("Latitude") != null &&
 				location.get_Value("Longitude") != null))
 			return;
@@ -135,7 +139,7 @@ public class MapboxHelper extends AbstractGeoreferencingHelper {
 
 					location.set_ValueNoCheck("Latitude", String.valueOf(firstResultPoint.latitude()));
 					location.set_ValueNoCheck("Longitude", String.valueOf(firstResultPoint.longitude()));
-					location.saveEx(trxName);
+					location.saveEx(null);
 				}
 			}
 

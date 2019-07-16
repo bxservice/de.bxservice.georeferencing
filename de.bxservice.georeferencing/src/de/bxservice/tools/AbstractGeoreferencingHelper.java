@@ -28,15 +28,10 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.compiere.util.CLogger;
-
 import de.bxservice.model.MBXSGeoreferencing;
 import de.bxservice.model.MBXSMarker;
 
 public abstract class AbstractGeoreferencingHelper implements IGeoreferencingHelper {
-	
-	/**	Logger			*/
-	protected static CLogger log = CLogger.getCLogger(AbstractGeoreferencingHelper.class);
 	
 	protected List<MBXSMarker> mapMarkers = new ArrayList<>();
 	protected BigDecimal zoomValue        = BigDecimal.ONE;
