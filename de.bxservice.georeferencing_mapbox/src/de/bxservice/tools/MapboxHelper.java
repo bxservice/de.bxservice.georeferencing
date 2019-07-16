@@ -51,10 +51,10 @@ import retrofit2.Response;
 public class MapboxHelper extends AbstractGeoreferencingHelper {
 	
 	/**	Mapbox Access Token		*/
-	private static final String API_KEY = MSysConfig.getValue("MAPBOX_API_KEY");
+	private String API_KEY = "";
 	
 	/** HTML Header with all the api references, the javascript script, plus the CSS rules */
-	private static final String HTML_HEAD = "<!DOCTYPE html>" + 
+	private final String HTML_HEAD = "<!DOCTYPE html>" + 
 			"<head>" + 
 			"  <script src=\"https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js\"></script>" + 
 			"  <link href=\"https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css\" rel=\"stylesheet\" />" + 
@@ -77,6 +77,10 @@ public class MapboxHelper extends AbstractGeoreferencingHelper {
 			"  <div id=\"map\"></div>" +
 			"  <script> " + 
 			"  mapboxgl.accessToken = '" + API_KEY + "';";
+	
+	public MapboxHelper() {
+		API_KEY = MSysConfig.getValue("MAPBOX_API_KEY");
+	}
 	
 	@Override
 	public void setLatLong(List<MLocation> locations) {
