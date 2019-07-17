@@ -77,7 +77,7 @@ public class GeoReferencing {
 					+ "AND gt.AD_Language=? "
 					+ "ORDER BY gt.Name";
 			
-			list = DB.getKeyNamePairs(null, sql, true, Env.getAD_Client_ID(Env.getCtx()), Env.getAD_Role_ID(Env.getCtx()));
+			list = DB.getKeyNamePairs(null, sql, true, Env.getAD_Client_ID(Env.getCtx()), Env.getAD_Language(Env.getCtx()));
 		}
 		return list;
 	}
