@@ -28,6 +28,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.compiere.util.Util;
+
 import de.bxservice.model.MBXSGeoreferencing;
 import de.bxservice.model.MBXSMarker;
 
@@ -54,4 +56,24 @@ public abstract class AbstractGeoreferencingHelper implements IGeoreferencingHel
 				initialLongitude = geoConfiguration.getLongitude();
 		}
 	}
+	
+	/**
+	 * Returns a valid HTML String 
+	 * @param text String to be converted
+	 * @return String with HTML values
+	 */
+	public String getMarkerText(String text) {
+		if (!Util.isEmpty(text)) {
+			if (text.contains("\""))
+				text = text.replace("\"","&quot;");
+			if (text.contains("<"))
+				text = text.replace("<","&lt;");
+			if (text.contains(">"))
+				text = text.replace("<","&gt;");
+			
+			return text.replace("\n", "<br>");
+		}
+		return "";
+	}
+
 }

@@ -190,10 +190,10 @@ public class MapboxHelper extends AbstractGeoreferencingHelper {
 			
 			//If no color is defined -> use black
 			color = marker.getColor() != null ? marker.getColor() : "#000000";
-
+			
 			featureSegment.append(getFeatureCode(getCoordinates(marker), 
-					marker.getTitle() == null ? "" : marker.getTitle().replace("\n", "<br>"),
-					marker.getDescription() == null ? "" : marker.getDescription().replace("\n", "<br>"),
+					getMarkerText(marker.getTitle()),
+					getMarkerText(marker.getDescription()),
 							color));
 			featureSegment.append(",");
 		}
@@ -203,7 +203,7 @@ public class MapboxHelper extends AbstractGeoreferencingHelper {
 		
 		return featureSegment.toString();
 	}
-	
+		
 	@Override
 	public String getCoordinates(MBXSMarker marker) {
 		return "[" + marker.getLongitude() + "," + marker.getLatitude() + "]";
