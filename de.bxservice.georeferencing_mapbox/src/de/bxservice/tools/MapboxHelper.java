@@ -55,7 +55,7 @@ public class MapboxHelper extends AbstractGeoreferencingHelper {
 	protected CLogger log = CLogger.getCLogger(MapboxHelper.class);
 
 	/**	Mapbox Access Token		*/
-	private String API_KEY = "";
+	private String API_KEY = MSysConfig.getValue("MAPBOX_API_KEY");
 	
 	/** HTML Header with all the api references, the javascript script, plus the CSS rules */
 	private final String HTML_HEAD = "<!DOCTYPE html>" + 
@@ -81,10 +81,6 @@ public class MapboxHelper extends AbstractGeoreferencingHelper {
 			"  <div id=\"map\"></div>" +
 			"  <script> " + 
 			"  mapboxgl.accessToken = '" + API_KEY + "';";
-	
-	public MapboxHelper() {
-		API_KEY = MSysConfig.getValue("MAPBOX_API_KEY");
-	}
 	
 	@Override
 	public void setLatLong(List<MLocation> locations) {
