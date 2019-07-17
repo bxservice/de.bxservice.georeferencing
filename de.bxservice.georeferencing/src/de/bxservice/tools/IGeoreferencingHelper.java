@@ -36,5 +36,6 @@ public interface IGeoreferencingHelper {
 	public void setLatLong(MLocation location);
 	public String getMapMarkers();
 	public void setGeoconfiguration(MBXSGeoreferencing geoConfiguration);
+	public String getMarkerText(String text);
 	String getCoordinates(MBXSMarker marker);
 }
