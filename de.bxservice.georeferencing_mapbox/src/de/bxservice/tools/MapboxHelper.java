@@ -192,8 +192,8 @@ public class MapboxHelper extends AbstractGeoreferencingHelper {
 			color = marker.getColor() != null ? marker.getColor() : "#000000";
 
 			featureSegment.append(getFeatureCode(getCoordinates(marker), 
-					marker.getTitle() == null ? "" : marker.getTitle(),
-					marker.getDescription() == null ? "" : marker.getDescription(), 
+					marker.getTitle() == null ? "" : marker.getTitle().replace("\n", "<br>"),
+					marker.getDescription() == null ? "" : marker.getDescription().replace("\n", "<br>"),
 							color));
 			featureSegment.append(",");
 		}
