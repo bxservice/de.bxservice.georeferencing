@@ -173,10 +173,14 @@ public interface I_BXS_Georeferencing
     /** Column name BXS_Zoom */
     public static final String COLUMNNAME_BXS_Zoom = "BXS_Zoom";
 
-	/** Set Zoom Level	  */
+	/** Set Zoom Level.
+	  * Defines the initial Zoom Level
+	  */
 	public void setBXS_Zoom (BigDecimal BXS_Zoom);
 
-	/** Get Zoom Level	  */
+	/** Get Zoom Level.
+	  * Defines the initial Zoom Level
+	  */
 	public BigDecimal getBXS_Zoom();
 
     /** Column name Created */
@@ -221,6 +225,19 @@ public interface I_BXS_Georeferencing
 	  */
 	public String getFromClause();
 
+    /** Column name Help */
+    public static final String COLUMNNAME_Help = "Help";
+
+	/** Set Comment/Help.
+	  * Comment or Hint
+	  */
+	public void setHelp (String Help);
+
+	/** Get Comment/Help.
+	  * Comment or Hint
+	  */
+	public String getHelp();
+
     /** Column name IsActive */
     public static final String COLUMNNAME_IsActive = "IsActive";
 
@@ -238,12 +255,12 @@ public interface I_BXS_Georeferencing
     public static final String COLUMNNAME_Latitude = "Latitude";
 
 	/** Set Latitude.
-	  * Initial Latitude
+	  * Defines where the center of the map will be when it first opens. 
 	  */
 	public void setLatitude (BigDecimal Latitude);
 
 	/** Get Latitude.
-	  * Initial Latitude
+	  * Defines where the center of the map will be when it first opens. 
 	  */
 	public BigDecimal getLatitude();
 
@@ -251,12 +268,12 @@ public interface I_BXS_Georeferencing
     public static final String COLUMNNAME_Longitude = "Longitude";
 
 	/** Set Longitude.
-	  * Initial Longitude
+	  * Defines where the center of the map will be when it first opens. 
 	  */
 	public void setLongitude (BigDecimal Longitude);
 
 	/** Get Longitude.
-	  * Initial Longitude
+	  * Defines where the center of the map will be when it first opens. 
 	  */
 	public BigDecimal getLongitude();
 

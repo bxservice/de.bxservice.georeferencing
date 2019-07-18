@@ -33,7 +33,7 @@ public class X_BXS_Georeferencing extends PO implements I_BXS_Georeferencing, I_
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20190712L;
+	private static final long serialVersionUID = 20190718L;
 
     /** Standard Constructor */
     public X_BXS_Georeferencing (Properties ctx, int BXS_Georeferencing_ID, String trxName)
@@ -263,14 +263,17 @@ public class X_BXS_Georeferencing extends PO implements I_BXS_Georeferencing, I_
 	}
 
 	/** Set Zoom Level.
-		@param BXS_Zoom Zoom Level	  */
+		@param BXS_Zoom 
+		Defines the initial Zoom Level
+	  */
 	public void setBXS_Zoom (BigDecimal BXS_Zoom)
 	{
 		set_Value (COLUMNNAME_BXS_Zoom, BXS_Zoom);
 	}
 
 	/** Get Zoom Level.
-		@return Zoom Level	  */
+		@return Defines the initial Zoom Level
+	  */
 	public BigDecimal getBXS_Zoom () 
 	{
 		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_BXS_Zoom);
@@ -313,9 +316,26 @@ public class X_BXS_Georeferencing extends PO implements I_BXS_Georeferencing, I_
 		return (String)get_Value(COLUMNNAME_FromClause);
 	}
 
+	/** Set Comment/Help.
+		@param Help 
+		Comment or Hint
+	  */
+	public void setHelp (String Help)
+	{
+		set_Value (COLUMNNAME_Help, Help);
+	}
+
+	/** Get Comment/Help.
+		@return Comment or Hint
+	  */
+	public String getHelp () 
+	{
+		return (String)get_Value(COLUMNNAME_Help);
+	}
+
 	/** Set Latitude.
 		@param Latitude 
-		Initial Latitude
+		Defines where the center of the map will be when it first opens. 
 	  */
 	public void setLatitude (BigDecimal Latitude)
 	{
@@ -323,7 +343,7 @@ public class X_BXS_Georeferencing extends PO implements I_BXS_Georeferencing, I_
 	}
 
 	/** Get Latitude.
-		@return Initial Latitude
+		@return Defines where the center of the map will be when it first opens. 
 	  */
 	public BigDecimal getLatitude () 
 	{
@@ -335,7 +355,7 @@ public class X_BXS_Georeferencing extends PO implements I_BXS_Georeferencing, I_
 
 	/** Set Longitude.
 		@param Longitude 
-		Initial Longitude
+		Defines where the center of the map will be when it first opens. 
 	  */
 	public void setLongitude (BigDecimal Longitude)
 	{
@@ -343,7 +363,7 @@ public class X_BXS_Georeferencing extends PO implements I_BXS_Georeferencing, I_
 	}
 
 	/** Get Longitude.
-		@return Initial Longitude
+		@return Defines where the center of the map will be when it first opens. 
 	  */
 	public BigDecimal getLongitude () 
 	{

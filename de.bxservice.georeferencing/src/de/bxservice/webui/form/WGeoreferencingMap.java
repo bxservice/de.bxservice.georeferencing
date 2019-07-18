@@ -151,6 +151,7 @@ public class WGeoreferencingMap extends GeoReferencing implements IFormControlle
 
 	private void refresh() {
 		setMap(BXS_Georeferencing_ID);
+		SessionManager.getAppDesktop().updateHelpTooltip(null,null,null,null);
 		repaintMap();
 	}
 	
@@ -196,6 +197,9 @@ public class WGeoreferencingMap extends GeoReferencing implements IFormControlle
 		markersMap.setWidth("100%");
 		markersMap.setHeight("100%");
 		markersMap.setContent(media);
+		if (getGeoConfiguration() != null)
+			SessionManager.getAppDesktop().updateHelpTooltip(getGeoConfiguration().getDescription(),
+					getGeoConfiguration().getHelp(),null,null);
 	}
 	
 	@Override
