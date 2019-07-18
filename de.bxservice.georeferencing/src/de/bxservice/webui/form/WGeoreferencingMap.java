@@ -198,8 +198,8 @@ public class WGeoreferencingMap extends GeoReferencing implements IFormControlle
 		markersMap.setHeight("100%");
 		markersMap.setContent(media);
 		if (getGeoConfiguration() != null)
-			SessionManager.getAppDesktop().updateHelpTooltip(getGeoConfiguration().getDescription(),
-					getGeoConfiguration().getHelp(),null,null);
+			SessionManager.getAppDesktop().updateHelpTooltip(getGeoConfiguration().get_Translation(MBXSGeoreferencing.COLUMNNAME_Description),
+					getGeoConfiguration().get_Translation(MBXSGeoreferencing.COLUMNNAME_Help),null,null);
 	}
 	
 	@Override
