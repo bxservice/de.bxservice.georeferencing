@@ -46,11 +46,12 @@ import org.compiere.util.Util;
 
 public class MBXSGeoreferencing extends X_BXS_Georeferencing {
 
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 5797052750265743254L;
-	
+	private static final long serialVersionUID = 5590108858426943020L;
+
 	private List<MBXSMarker> mapMarkers;
 	private String additionalWhereClause;
 	
