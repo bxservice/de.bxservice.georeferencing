@@ -1,7 +1,4 @@
 /**********************************************************************
-* This file is part of iDempiere ERP Open Source                      *
-* http://www.idempiere.org                                            *
-*                                                                     *
 * Copyright (C) Contributors                                          *
 *                                                                     *
 * This program is free software; you can redistribute it and/or       *
@@ -20,22 +17,24 @@
 * MA 02110-1301, USA.                                                 *
 *                                                                     *
 * Contributors:                                                       *
-* - Diego Ruiz - BX Service GmbH								      *
+* - Diego Ruiz - Bx Service GmbH                                      *
 **********************************************************************/
-package de.bxservice.tools;
+package de.bxservice.georeferencing.factory;
+import org.adempiere.base.IProcessFactory;
+import org.compiere.process.ProcessCall;
+import org.osgi.service.component.annotations.Component;
 
-import java.util.List;
+import de.bxservice.georeferencing.process.BXSAddressLongitudeLatitude;
 
-import org.compiere.model.MLocation;
+@Component(
+		property= {"service.ranking:Integer=100"}
+)
+public class GeoreferencingProcessFactory implements IProcessFactory {
 
-import de.bxservice.model.MBXSGeoreferencing;
-import de.bxservice.model.MBXSMarker;
-
-public interface IGeoreferencingHelper {
-	public void setLatLong(List<MLocation> locations);
-	public void setLatLong(MLocation location);
-	public String getMapMarkers();
-	public void setGeoconfiguration(MBXSGeoreferencing geoConfiguration);
-	public String getMarkerText(String text);
-	String getCoordinates(MBXSMarker marker);
+	@Override
+	public ProcessCall newProcessInstance(String className) {
+		if (BXSAddressLongitudeLatitude.class.getName().equals(className)) 
+				return new BXSAddressLongitudeLatitude();
+		return null;
+	}
 }

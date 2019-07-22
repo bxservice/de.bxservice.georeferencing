@@ -15,7 +15,7 @@
  * or via info@compiere.org or http://www.compiere.org/license.html           *
  *****************************************************************************/
 /** Generated Model - DO NOT CHANGE */
-package de.bxservice.model;
+package de.bxservice.georeferencing.model;
 
 import java.math.BigDecimal;
 import java.sql.ResultSet;

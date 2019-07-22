@@ -22,58 +22,25 @@
 * Contributors:                                                       *
 * - Diego Ruiz - BX Service GmbH								      *
 **********************************************************************/
-package de.bxservice.tools;
+package de.bxservice.georeferencing.factory;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import org.adempiere.webui.factory.IFormFactory;
+import org.adempiere.webui.panel.ADForm;
+import org.osgi.service.component.annotations.Component;
 
-import org.compiere.util.Util;
+import de.bxservice.georeferencing.webui.form.WGeoreferencingMap;
 
-import de.bxservice.model.MBXSGeoreferencing;
-import de.bxservice.model.MBXSMarker;
-
-public abstract class AbstractGeoreferencingHelper implements IGeoreferencingHelper {
+@Component(
+		property= {"service.ranking:Integer=100"}
+)
+public class GeoreferencingFormFactory implements IFormFactory {
 	
-	protected List<MBXSMarker> mapMarkers = new ArrayList<>();
-	protected BigDecimal zoomValue        = BigDecimal.ONE;
-	protected BigDecimal initialLatitude  = BigDecimal.TEN;
-	protected BigDecimal initialLongitude = BigDecimal.TEN;
-	
-	public void setGeoconfiguration(MBXSGeoreferencing geoConfiguration) {
-		if (geoConfiguration != null) {
-			mapMarkers = geoConfiguration.getMapMarkers();
-			
-			if (geoConfiguration.getBXS_Zoom() != null) {
-				//Zoom must be between 0 and 22
-				if (geoConfiguration.getBXS_Zoom().compareTo(BigDecimal.ZERO) >= 0 &&
-						geoConfiguration.getBXS_Zoom().compareTo(BigDecimal.valueOf(22)) <= 0)
-					zoomValue = geoConfiguration.getBXS_Zoom();
-			}
-			if (geoConfiguration.getLatitude() != null)
-				initialLatitude = geoConfiguration.getLatitude();
-			if (geoConfiguration.getLongitude() != null)
-				initialLongitude = geoConfiguration.getLongitude();
-		}
+	@Override
+	public ADForm newFormInstance(String formName) {
+		
+		if (WGeoreferencingMap.class.getName().equals(formName))
+			return new WGeoreferencingMap().getForm();
+		
+		return null;
 	}
-	
-	/**
-	 * Returns a valid HTML String 
-	 * @param text String to be converted
-	 * @return String with HTML values
-	 */
-	public String getMarkerText(String text) {
-		if (!Util.isEmpty(text)) {
-			if (text.contains("\""))
-				text = text.replace("\"","&quot;");
-			if (text.contains("<"))
-				text = text.replace("<","&lt;");
-			if (text.contains(">"))
-				text = text.replace("<","&gt;");
-			
-			return text.replace("\n", "<br>");
-		}
-		return "";
-	}
-
 }

@@ -22,7 +22,7 @@
 * Contributors:                                                       *
 * - Diego Ruiz - BX Service GmbH								      *
 **********************************************************************/
-package de.bxservice.model;
+package de.bxservice.georeferencing.model;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

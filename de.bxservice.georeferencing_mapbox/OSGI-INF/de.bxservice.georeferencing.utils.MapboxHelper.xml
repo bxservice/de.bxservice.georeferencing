@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="de.bxservice.georeferencing.utils.MapboxHelper">
+   <property name="helperType" type="String" value="MAPBOX"/>
+   <service>
+      <provide interface="de.bxservice.georeferencing.tools.IGeoreferencingHelper"/>
+   </service>
+   <implementation class="de.bxservice.georeferencing.utils.MapboxHelper"/>
+</scr:component>

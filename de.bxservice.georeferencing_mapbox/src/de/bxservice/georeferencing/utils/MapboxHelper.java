@@ -22,7 +22,7 @@
 * Contributors:                                                       *
 * - Diego Ruiz - BX Service GmbH								      *
 **********************************************************************/
-package de.bxservice.tools;
+package de.bxservice.georeferencing.utils;
 
 import java.util.List;
 import java.util.logging.Level;
@@ -40,7 +40,9 @@ import com.mapbox.api.geocoding.v5.models.CarmenFeature;
 import com.mapbox.api.geocoding.v5.models.GeocodingResponse;
 import com.mapbox.geojson.Point;
 
-import de.bxservice.model.MBXSMarker;
+import de.bxservice.georeferencing.model.MBXSMarker;
+import de.bxservice.georeferencing.tools.AbstractGeoreferencingHelper;
+import de.bxservice.georeferencing.tools.IGeoreferencingHelper;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
