@@ -19,7 +19,7 @@
  * Contributors:                                                       *
  * - Diego Ruiz - Bx Service GmbH                                      *
  **********************************************************************/
-package de.bxservice.process;
+package de.bxservice.georeferencing.process;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -32,8 +32,8 @@ import org.compiere.process.ProcessInfoParameter;
 import org.compiere.process.SvrProcess;
 import org.compiere.util.Env;
 
-import de.bxservice.tools.GeoreferencingHelperFactory;
-import de.bxservice.tools.IGeoreferencingHelper;
+import de.bxservice.georeferencing.tools.GeoreferencingHelperFactory;
+import de.bxservice.georeferencing.tools.IGeoreferencingHelper;
 
 public class BXSAddressLongitudeLatitude  extends SvrProcess {
 

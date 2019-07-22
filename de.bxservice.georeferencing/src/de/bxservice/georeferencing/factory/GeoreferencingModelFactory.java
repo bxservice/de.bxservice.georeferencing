@@ -19,7 +19,7 @@
 * Contributors:                                                       *
 * - Diego Ruiz - Bx Service GmbH                                      *
 **********************************************************************/
-package de.bxservice.factory;
+package de.bxservice.georeferencing.factory;
 
 import java.sql.ResultSet;
 
@@ -28,7 +28,7 @@ import org.compiere.model.PO;
 import org.compiere.util.Env;
 import org.osgi.service.component.annotations.Component;
 
-import de.bxservice.model.MBXSGeoreferencing;
+import de.bxservice.georeferencing.model.MBXSGeoreferencing;
 
 @Component(
 		property= {"service.ranking:Integer=5"}

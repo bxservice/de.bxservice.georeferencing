@@ -1,4 +1,7 @@
 /**********************************************************************
+* This file is part of iDempiere ERP Open Source                      *
+* http://www.idempiere.org                                            *
+*                                                                     *
 * Copyright (C) Contributors                                          *
 *                                                                     *
 * This program is free software; you can redistribute it and/or       *
@@ -17,24 +20,22 @@
 * MA 02110-1301, USA.                                                 *
 *                                                                     *
 * Contributors:                                                       *
-* - Diego Ruiz - Bx Service GmbH                                      *
+* - Diego Ruiz - BX Service GmbH								      *
 **********************************************************************/
-package de.bxservice.factory;
-import org.adempiere.base.IProcessFactory;
-import org.compiere.process.ProcessCall;
-import org.osgi.service.component.annotations.Component;
+package de.bxservice.georeferencing.tools;
 
-import de.bxservice.process.BXSAddressLongitudeLatitude;
+import java.util.List;
 
-@Component(
-		property= {"service.ranking:Integer=100"}
-)
-public class GeoreferencingProcessFactory implements IProcessFactory {
+import org.compiere.model.MLocation;
 
-	@Override
-	public ProcessCall newProcessInstance(String className) {
-		if (BXSAddressLongitudeLatitude.class.getName().equals(className)) 
-				return new BXSAddressLongitudeLatitude();
-		return null;
-	}
+import de.bxservice.georeferencing.model.MBXSGeoreferencing;
+import de.bxservice.georeferencing.model.MBXSMarker;
+
+public interface IGeoreferencingHelper {
+	public void setLatLong(List<MLocation> locations);
+	public void setLatLong(MLocation location);
+	public String getMapMarkers();
+	public void setGeoconfiguration(MBXSGeoreferencing geoConfiguration);
+	public String getMarkerText(String text);
+	String getCoordinates(MBXSMarker marker);
 }

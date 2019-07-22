@@ -22,7 +22,7 @@
  * Contributors:                                                       *
  * - Diego Ruiz - BX Service GmbH                                      *
  **********************************************************************/
-package de.bxservice.tools;
+package de.bxservice.georeferencing.tools;
 
 import java.lang.reflect.InvocationTargetException;
 

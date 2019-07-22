@@ -22,7 +22,7 @@
  * Contributors:                                                       *
  * - Diego Ruiz - BX Service GmbH                                      *
  **********************************************************************/
-package de.bxservice.webui.apps.form;
+package de.bxservice.georeferencing.webui.apps.form;
 
 
 
@@ -31,9 +31,9 @@ import org.compiere.util.DB;
 import org.compiere.util.Env;
 import org.compiere.util.KeyNamePair;
 
-import de.bxservice.model.MBXSGeoreferencing;
-import de.bxservice.tools.GeoreferencingHelperFactory;
-import de.bxservice.tools.IGeoreferencingHelper;
+import de.bxservice.georeferencing.model.MBXSGeoreferencing;
+import de.bxservice.georeferencing.tools.GeoreferencingHelperFactory;
+import de.bxservice.georeferencing.tools.IGeoreferencingHelper;
 
 public class GeoReferencing {
 

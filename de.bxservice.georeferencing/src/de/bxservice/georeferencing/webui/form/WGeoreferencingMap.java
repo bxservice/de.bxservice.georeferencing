@@ -22,7 +22,7 @@
  * Contributors:                                                       *
  * - Diego Ruiz - BX Service GmbH								      *
  **********************************************************************/
-package de.bxservice.webui.form;
+package de.bxservice.georeferencing.webui.form;
 
 import org.adempiere.webui.LayoutUtils;
 import org.adempiere.webui.component.Button;
@@ -47,8 +47,8 @@ import org.zkoss.zul.Iframe;
 import org.zkoss.zul.North;
 import org.zkoss.zul.South;
 
-import de.bxservice.model.MBXSGeoreferencing;
-import de.bxservice.webui.apps.form.GeoReferencing;
+import de.bxservice.georeferencing.model.MBXSGeoreferencing;
+import de.bxservice.georeferencing.webui.apps.form.GeoReferencing;
 
 
 public class WGeoreferencingMap extends GeoReferencing implements IFormController, EventListener<Event> {
