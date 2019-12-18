@@ -126,18 +126,21 @@ public class MapboxHelper extends AbstractGeoreferencingHelper {
 		mapboxGeocoding.enqueueCall(new Callback<GeocodingResponse>() {
 			@Override
 			public void onResponse(Call<GeocodingResponse> call, Response<GeocodingResponse> response) {
-				List<CarmenFeature> results = response.body().features();
+				
+				if (response != null && response.body() != null) {
+					List<CarmenFeature> results = response.body().features();
 
-				if (results.size() > 0) {
+					if (results != null && results.size() > 0) {
 
-					// Save the first results Point.
-					Point firstResultPoint = results.get(0).center();
-					if (log.isLoggable(Level.INFO)) 
-						log.info("Coordinates for " + address + ": long: " + firstResultPoint.longitude() + " lat: " + firstResultPoint.latitude());
+						// Save the first results Point.
+						Point firstResultPoint = results.get(0).center();
+						if (log.isLoggable(Level.INFO)) 
+							log.info("Coordinates for " + address + ": long: " + firstResultPoint.longitude() + " lat: " + firstResultPoint.latitude());
 
-					location.set_ValueNoCheck("Latitude", String.valueOf(firstResultPoint.latitude()));
-					location.set_ValueNoCheck("Longitude", String.valueOf(firstResultPoint.longitude()));
-					location.saveEx(null);
+						location.set_ValueNoCheck("Latitude", String.valueOf(firstResultPoint.latitude()));
+						location.set_ValueNoCheck("Longitude", String.valueOf(firstResultPoint.longitude()));
+						location.saveEx(null);
+					}					
 				}
 			}
 
