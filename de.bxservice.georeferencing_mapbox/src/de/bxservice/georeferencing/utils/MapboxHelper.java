@@ -60,10 +60,13 @@ public class MapboxHelper extends AbstractGeoreferencingHelper {
 	private String API_KEY = MSysConfig.getValue("MAPBOX_API_KEY");
 	
 	/** HTML Header with all the api references, the javascript script, plus the CSS rules */
-	private final String HTML_HEAD = "<!DOCTYPE html>" + 
-			"<head>" + 
-			"  <script src=\"https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js\"></script>" + 
-			"  <link href=\"https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css\" rel=\"stylesheet\" />" + 
+	private final String HTML_HEAD = "<!DOCTYPE html>" +
+			"<html>" + 
+			"<head>" +
+			"  <meta charset='utf-8'/>" +
+			"  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />" +
+			"  <script src=\"https://api.tiles.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js\"></script>" + 
+			"  <link href=\"https://api.tiles.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css\" rel=\"stylesheet\" />" + 
 			"  <style>" + 
 			"        body { margin:0; padding:0; }" + 
 			"        #map { position:absolute; top:0; bottom:0; width:100%; }" + 
