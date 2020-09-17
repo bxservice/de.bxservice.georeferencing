@@ -40,8 +40,8 @@ import com.mapbox.api.geocoding.v5.models.CarmenFeature;
 import com.mapbox.api.geocoding.v5.models.GeocodingResponse;
 import com.mapbox.geojson.Point;
 
-import de.bxservice.georeferencing.model.MBXSMarker;
 import de.bxservice.georeferencing.tools.AbstractGeoreferencingHelper;
+import de.bxservice.georeferencing.tools.DefaultMarkersGeojson;
 import de.bxservice.georeferencing.tools.IGeoreferencingHelper;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -58,6 +58,8 @@ public class MapboxHelper extends AbstractGeoreferencingHelper {
 
 	/**	Mapbox Access Token		*/
 	private String API_KEY = MSysConfig.getValue("MAPBOX_API_KEY");
+	
+	private DefaultMarkersGeojson markersGeojsonParse = new DefaultMarkersGeojson("#000000");
 	
 	/** HTML Header with all the api references, the javascript script, plus the CSS rules */
 	private final String HTML_HEAD = "<!DOCTYPE html>" +
@@ -181,56 +183,6 @@ public class MapboxHelper extends AbstractGeoreferencingHelper {
 				"</body>" + 
 				"</html>";
 		
-		return HTML_HEAD + addMarkers() + HTML_CLOSE;
-	}
-	
-	private String addMarkers() {
-		
-		if (mapMarkers == null || mapMarkers.isEmpty())
-			return "";
-		
-		StringBuilder featureSegment = new StringBuilder("var geojson = {" +
-				"    type: \"FeatureCollection\"," + 
-				"    features: [");
-		
-		String color = null;
-		for (MBXSMarker marker : mapMarkers) {
-			
-			//If no color is defined -> use black
-			color = marker.getColor() != null ? marker.getColor() : "#000000";
-			
-			featureSegment.append(getFeatureCode(getCoordinates(marker), 
-					getMarkerText(marker.getTitle()),
-					getMarkerText(marker.getDescription()),
-							color));
-			featureSegment.append(",");
-		}
-
-		featureSegment.append("]" + 
-				"};");
-		
-		return featureSegment.toString();
-	}
-		
-	@Override
-	public String getCoordinates(MBXSMarker marker) {
-		return "[" + marker.getLongitude() + "," + marker.getLatitude() + "]";
-	}
-	
-	private String getFeatureCode(String coordinates, String title, String description, String color) {
-		String featureCode = "{ " +
-				"type: \"Feature\", " +
-				"geometry: { " + 
-				"type: \"Point\", "+ 
-				"coordinates: " + coordinates +
-				"}, " +
-				"properties: { " +
-				"title: \"" + title + "\", "+ 
-				"description: \"" + description + "\", "+
-				"mcolor: '" + color + "' "+
-				"} "+
-				"}";
-
-		return featureCode;
+		return HTML_HEAD + markersGeojsonParse.buildMarkersAsGeojson(mapMarkers) + HTML_CLOSE;
 	}
 }

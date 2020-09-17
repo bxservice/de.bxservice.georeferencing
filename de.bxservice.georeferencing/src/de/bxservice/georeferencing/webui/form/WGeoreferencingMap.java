@@ -24,6 +24,8 @@
  **********************************************************************/
 package de.bxservice.georeferencing.webui.form;
 
+import java.util.List;
+
 import org.adempiere.webui.LayoutUtils;
 import org.adempiere.webui.component.Button;
 import org.adempiere.webui.component.Label;
@@ -37,6 +39,7 @@ import org.adempiere.webui.theme.ThemeManager;
 import org.compiere.util.Env;
 import org.compiere.util.KeyNamePair;
 import org.compiere.util.Msg;
+import org.compiere.util.ValueNamePair;
 import org.zkoss.util.media.AMedia;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
@@ -48,6 +51,7 @@ import org.zkoss.zul.North;
 import org.zkoss.zul.South;
 
 import de.bxservice.georeferencing.model.MBXSGeoreferencing;
+import de.bxservice.georeferencing.tools.OsgiUtil;
 import de.bxservice.georeferencing.webui.apps.form.GeoReferencing;
 
 
@@ -61,10 +65,12 @@ public class WGeoreferencingMap extends GeoReferencing implements IFormControlle
 	
 	/** North configuration panel **/
 	private Label lMaps = new Label();
+	private Label lMapProvider = new Label();
 	private Button bRefresh = new Button();
 	private Hbox northPanelHbox;
 	private Listbox mapsCombobox = ListboxFactory.newDropdownListbox();
-	
+	private Listbox mapsProviderCombobox = ListboxFactory.newDropdownListbox();
+	private String mapProviderName = null;
 	/** South content panel **/
 	private Iframe markersMap;
 	
@@ -93,6 +99,21 @@ public class WGeoreferencingMap extends GeoReferencing implements IFormControlle
 			mapsCombobox.addItem(mapConfigurations);
 
 		mapsCombobox.addEventListener(Events.ON_SELECT, this);
+		
+		List<String> mapProviderNames = OsgiUtil.getMapProviders();
+		mapsProviderCombobox.addEventListener(Events.ON_SELECT, this);
+		for (String mapProviderName : mapProviderNames) {
+			mapsProviderCombobox.addItem(new ValueNamePair(mapProviderName, mapProviderName));
+		}
+		
+		if (mapProviderNames.size() > 0) {
+			mapsProviderCombobox.setSelectedIndex(0);
+			mapProviderName = mapProviderNames.get(0);
+		}
+		
+		lMapProvider.setVisible(mapProviderNames.size() > 1);
+		mapsProviderCombobox.setVisible(mapProviderNames.size() > 1);
+			
 	}   //  dynList
 
 	/**
@@ -111,11 +132,15 @@ public class WGeoreferencingMap extends GeoReferencing implements IFormControlle
 		
 		lMaps.setText(Msg.translate(Env.getCtx(), "Map"));
 		lMaps.setStyle("vertical-align: middle;");
+		lMapProvider.setText(Msg.translate(Env.getCtx(), "Map Provider"));
+		lMapProvider.setStyle("vertical-align: middle;");
 		bRefresh.setImage(ThemeManager.getThemeResource("images/Refresh16.png"));
 		bRefresh.setTooltiptext(Msg.getMsg(Env.getCtx(), "Refresh"));
 		bRefresh.addEventListener(Events.ON_CLICK, this);
 
 		northPanelHbox = new Hbox();
+		northPanelHbox.appendChild(lMapProvider);
+		northPanelHbox.appendChild(mapsProviderCombobox);
 		northPanelHbox.appendChild(lMaps.rightAlign());
 		northPanelHbox.appendChild(mapsCombobox);			
 		northPanelHbox.appendChild(bRefresh);
@@ -145,7 +170,7 @@ public class WGeoreferencingMap extends GeoReferencing implements IFormControlle
 
 		if (BXS_Georeferencing_ID != -1) {
 			setMap(BXS_Georeferencing_ID);
-			setContent(getHTMLCode());
+			setContent(getHTMLCode(mapProviderName));
 		}
 	}
 
@@ -163,9 +188,8 @@ public class WGeoreferencingMap extends GeoReferencing implements IFormControlle
 	
 	@Override
 	public void onEvent(Event event) throws Exception {
-		if (Events.ON_SELECT.equals(event.getName()) && event.getTarget() instanceof Listbox) {
+		if (Events.ON_SELECT.equals(event.getName()) && event.getTarget() == mapsCombobox) {
 			if (mapsCombobox.getSelectedIndex() != -1) {
-
 				KeyNamePair geoMap = null;
 				BXS_Georeferencing_ID = -1;
 				geoMap = (KeyNamePair) mapsCombobox.getSelectedItem().toKeyNamePair();	
@@ -175,6 +199,14 @@ public class WGeoreferencingMap extends GeoReferencing implements IFormControlle
 			}
 		} else if (Events.ON_CLICK.equals(event.getName()) && event.getTarget() instanceof Button) 
 			refresh();
+		else if (Events.ON_SELECT.equals(event.getName()) && event.getTarget() == mapsProviderCombobox) {
+			if (mapsProviderCombobox.getSelectedItem() == null) {
+				mapProviderName = null;
+			}else {
+				mapProviderName = mapsProviderCombobox.getSelectedItem().toValueNamePair().getValue();
+			}
+			refresh();
+		}
 	}
 	
 	/**
@@ -188,7 +220,7 @@ public class WGeoreferencingMap extends GeoReferencing implements IFormControlle
 			BXS_Georeferencing_ID = geoConfig.getBXS_Georeferencing_ID();
 			lMaps.setVisible(false);
 			mapsCombobox.setVisible(false);
-			setContent(getHTMLCode());
+			setContent(getHTMLCode(mapProviderName));
 		}
 	}
 	
