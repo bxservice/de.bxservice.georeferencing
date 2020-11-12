@@ -71,8 +71,8 @@ public class BXSAddressLongitudeLatitude  extends SvrProcess {
 		}
 
 		if (p_AD_Org_ID > 0) {
-			MOrgInfo org = MOrgInfo.get(getCtx(), p_AD_Org_ID, get_TrxName());
-			MLocation orgloc = MLocation.get(getCtx(), org.getC_Location_ID(), get_TrxName());
+			MOrgInfo org = MOrgInfo.get(p_AD_Org_ID);
+			MLocation orgloc = MLocation.get(org.getC_Location_ID());
 			mapHelper.setLatLong(orgloc);
 		}
 
