@@ -80,7 +80,6 @@ public class WGeoreferencingMap extends GeoReferencing implements IFormControlle
 			windowNo = SessionManager.getAppDesktop().registerWindow(this);
 			dynList();
 			jbInit();
-			LayoutUtils.sendDeferLayoutEvent(mainLayout, 100);
 		} catch (Exception ex){}
 	}
 
