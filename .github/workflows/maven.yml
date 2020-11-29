@@ -1,0 +1,73 @@
+# This workflow will build a Java project with Maven
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout idempiere
+      uses: actions/checkout@v2
+      with:
+        repository: idempiere/idempiere
+        path: idempiere
+        ref: master
+
+    # https://github.com/marketplace/actions/setup-java-jdk
+    - name: Set up JDK 11
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+
+    - name: Create folder for extra plugins
+      # ERROR: working-directory: $GITHUB_WORKSPACE it make build fail with error "No such file or directory"
+      run: mkdir $GITHUB_WORKSPACE/project.extra.bundle
+
+    ## checkout de.bxservice.georeferencing to extra folder
+    - name: Checkout plugin de.bxservice.georeferencing
+      uses: actions/checkout@v2
+      with:
+        repository: hieplq/de.bxservice.georeferencing.git
+        path: project.extra.bundle/de.bxservice.georeferencing
+        token: ${{ secrets.hieplqauthenticate }}
+
+    # run shell: https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsrun
+    # Append maven stuff to build include plugins
+    - name: Prepare plugin for maven
+      run: |
+        cat << "EOT" > $GITHUB_WORKSPACE/project.extra.bundle/pom.xml
+          <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+            <modelVersion>4.0.0</modelVersion>
+            <groupId>org.idempiere.extra</groupId>
+            <version>7.1.0-SNAPSHOT</version>
+            <artifactId>org.idempiere.extra.customize.bundle</artifactId>
+            <packaging>pom</packaging>
+
+            <modules>
+              <module>de.bxservice.georeferencing/de.bxservice.georeferencing</module>
+              <module>de.bxservice.georeferencing/de.bxservice.georeferencing_mapbox</module>
+            </modules>
+          </project>
+        EOT
+        
+        sed -i -r "s|(^\s*</modules>)|<module>../project.extra.bundle</module>\n\1|g" $GITHUB_WORKSPACE/idempiere/pom.xml
+        ## include more plugin to $GITHUB_WORKSPACE/idempiere/org.adempiere.server-feature/feature.xml
+        sed -i -r 's|(^\s*</feature>)|   <plugin\n         id="de.bxservice.georeferencing"\n         download-size="0"\n         install-size="0"\n         version="0.0.0"\n         unpack="false"/>\n\1|g' $GITHUB_WORKSPACE/idempiere/org.adempiere.server-feature/feature.xml
+        sed -i -r 's|(^\s*</feature>)|   <plugin\n         id="de.bxservice.georeferencing_mapbox"\n         download-size="0"\n         install-size="0"\n         version="0.0.0"\n         unpack="false"/>\n\1|g' $GITHUB_WORKSPACE/idempiere/org.adempiere.server-feature/feature.xml
+
+    - name: Build with Maven
+      run: |
+        cd $GITHUB_WORKSPACE/idempiere/org.idempiere.parent
+        mvn install -q
+        cd $GITHUB_WORKSPACE/idempiere
+        mvn verify -q
