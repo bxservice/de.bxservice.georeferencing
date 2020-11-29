@@ -38,7 +38,7 @@ jobs:
       with:
         repository: hieplq/de.bxservice.georeferencing.git
         path: project.extra.bundle/de.bxservice.georeferencing
-        token: ${{ secrets.hieplqauthenticate }}
+        ref: master
 
     # run shell: https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsrun
     # Append maven stuff to build include plugins
