@@ -119,7 +119,7 @@ public class MapboxHelper extends AbstractGeoreferencingHelper {
 		
 		String address = location.getMapsLocation();
 
-		MCountry country = MCountry.get(Env.getCtx(), location.getC_Country_ID());
+		MCountry country = MCountry.get(location.getC_Country_ID());
 		String isoCode = country != null ? country.getCountryCode()  : "";
 
 		MapboxGeocoding mapboxGeocoding = MapboxGeocoding.builder()

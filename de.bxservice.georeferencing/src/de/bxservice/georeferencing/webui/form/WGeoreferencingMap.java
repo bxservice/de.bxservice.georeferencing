@@ -86,7 +86,6 @@ public class WGeoreferencingMap extends GeoReferencing implements IFormControlle
 			windowNo = SessionManager.getAppDesktop().registerWindow(this);
 			dynList();
 			jbInit();
-			LayoutUtils.sendDeferLayoutEvent(mainLayout, 100);
 		} catch (Exception ex){}
 	}
 
@@ -134,7 +133,10 @@ public class WGeoreferencingMap extends GeoReferencing implements IFormControlle
 		lMaps.setStyle("vertical-align: middle;");
 		lMapProvider.setText(Msg.translate(Env.getCtx(), "Map Provider"));
 		lMapProvider.setStyle("vertical-align: middle;");
-		bRefresh.setImage(ThemeManager.getThemeResource("images/Refresh16.png"));
+		if (ThemeManager.isUseFontIconForImage())
+			bRefresh.setIconSclass("z-icon-Refresh");
+		else
+			bRefresh.setImage(ThemeManager.getThemeResource("images/Refresh16.png"));
 		bRefresh.setTooltiptext(Msg.getMsg(Env.getCtx(), "Refresh"));
 		bRefresh.addEventListener(Events.ON_CLICK, this);
 

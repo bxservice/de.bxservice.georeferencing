@@ -89,15 +89,15 @@ public class MBXSGeoreferencing extends X_BXS_Georeferencing {
 	            //Set the organization marker
 	            if (isBXS_IsOrgIncluded() && Env.getAD_Org_ID(getCtx()) != 0) {
 	            	
-	        		MOrgInfo orgInfo = MOrgInfo.get(Env.getCtx(), Env.getAD_Org_ID(getCtx()), null);
+	        		MOrgInfo orgInfo = MOrgInfo.get(Env.getAD_Org_ID(getCtx()));
 	        		if (orgInfo != null) {
-	        			MLocation orgLoc = MLocation.get(Env.getCtx(), orgInfo.getC_Location_ID(), get_TrxName());
+	        			MLocation orgLoc = MLocation.get(orgInfo.getC_Location_ID());
 	        			if (orgLoc != null && orgLoc.get_Value("Latitude") != null &&
 		        				orgLoc.get_Value("Longitude") != null) {
 	        				MBXSMarker marker = new MBXSMarker();
 	    	            	marker.setLatitude((String) orgLoc.get_Value("Latitude"));
 	    	            	marker.setLongitude((String) orgLoc.get_Value("Longitude"));
-	    	            	marker.setTitle(MOrg.get(getCtx(), Env.getAD_Org_ID(getCtx())).getName());
+	    	            	marker.setTitle(MOrg.get(Env.getAD_Org_ID(getCtx())).getName());
 	    	            	marker.setDescription("");
 	    	            	
 	    	            	String color = "red"; //Default value
