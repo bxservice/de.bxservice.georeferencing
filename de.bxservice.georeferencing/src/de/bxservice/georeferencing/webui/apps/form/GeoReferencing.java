@@ -86,8 +86,8 @@ public class GeoReferencing {
 		return geoConfiguration;
 	}
 	
-	protected String getHTMLCode() {
-		IGeoreferencingHelper mapHelper = GeoreferencingHelperFactory.getGeoreferencingHelper(null);
+	protected String getHTMLCode(String mapProviderName) {
+		IGeoreferencingHelper mapHelper = GeoreferencingHelperFactory.getGeoreferencingHelper(mapProviderName);
 		mapHelper.setGeoconfiguration(getGeoConfiguration());
 		return mapHelper.getMapMarkers();
 	}

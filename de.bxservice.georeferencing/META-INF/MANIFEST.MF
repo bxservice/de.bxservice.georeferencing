@@ -11,13 +11,14 @@ Require-Bundle: org.adempiere.plugin.utils;bundle-version="6.2.0",
  zcommon;bundle-version="8.0.1",
  zul;bundle-version="8.0.1"
 Bundle-Activator: org.adempiere.plugin.utils.Incremental2PackActivator
-Import-Package: org.osgi.service.component.annotations;version="1.3.0";resolution:=optional
+Import-Package: org.osgi.framework;version="1.9.0",
+ org.osgi.service.component.annotations;version="1.3.0";resolution:=optional
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
 Export-Package: de.bxservice.georeferencing.model,
  de.bxservice.georeferencing.tools,
  de.bxservice.georeferencing.webui.form
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version>=8))"
 Service-Component: OSGI-INF/de.bxservice.georeferencing.factory.GeoreferencingProcessFactory.xml,
  OSGI-INF/de.bxservice.georeferencing.factory.GeoreferencingModelFactory.xml,
  OSGI-INF/de.bxservice.georeferencing.factory.GeoreferencingFormFactory.xml

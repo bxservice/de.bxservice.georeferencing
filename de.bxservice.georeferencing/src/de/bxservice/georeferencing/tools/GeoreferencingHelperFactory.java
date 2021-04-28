@@ -31,14 +31,8 @@ import org.adempiere.base.ServiceQuery;
 import org.adempiere.exceptions.AdempiereException;
 
 public class GeoreferencingHelperFactory {
-
-	//A default value of mapbox to avoid NPE
-	private static final String GEO_HELPER_TYPE = "MAPBOX";
 	
 	public static IGeoreferencingHelper getGeoreferencingHelper(String helperType) {
-		if (helperType == null)
-			helperType = GEO_HELPER_TYPE;
-		
 		ServiceQuery query = new ServiceQuery();
 		query.put("helperType", helperType);
 		IGeoreferencingHelper custom = Service.locator().locate(IGeoreferencingHelper.class, query).getService();

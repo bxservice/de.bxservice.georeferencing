@@ -29,13 +29,10 @@ import java.util.List;
 import org.compiere.model.MLocation;
 
 import de.bxservice.georeferencing.model.MBXSGeoreferencing;
-import de.bxservice.georeferencing.model.MBXSMarker;
 
 public interface IGeoreferencingHelper {
 	public void setLatLong(List<MLocation> locations);
 	public void setLatLong(MLocation location);
 	public String getMapMarkers();
 	public void setGeoconfiguration(MBXSGeoreferencing geoConfiguration);
-	public String getMarkerText(String text);
-	String getCoordinates(MBXSMarker marker);
 }
