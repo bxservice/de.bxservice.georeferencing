@@ -17,7 +17,5 @@ Bundle-ClassPath: .
 Export-Package: de.bxservice.georeferencing.model,
  de.bxservice.georeferencing.tools,
  de.bxservice.georeferencing.webui.form
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Service-Component: OSGI-INF/de.bxservice.georeferencing.factory.GeoreferencingProcessFactory.xml,
- OSGI-INF/de.bxservice.georeferencing.factory.GeoreferencingModelFactory.xml,
- OSGI-INF/de.bxservice.georeferencing.factory.GeoreferencingFormFactory.xml
+Bundle-RequiredExecutionEnvironment: JavaSE-17
+Service-Component: OSGI-INF/*.xml
