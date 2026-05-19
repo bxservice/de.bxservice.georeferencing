@@ -26,6 +26,7 @@ package de.bxservice.georeferencing.webui.form;
 
 import org.adempiere.webui.LayoutUtils;
 import org.adempiere.webui.component.Button;
+import org.adempiere.webui.component.FlexHlayout;
 import org.adempiere.webui.component.Label;
 import org.adempiere.webui.component.Listbox;
 import org.adempiere.webui.component.ListboxFactory;
@@ -42,7 +43,6 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zul.Borderlayout;
-import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Iframe;
 import org.zkoss.zul.North;
 import org.zkoss.zul.South;
@@ -62,7 +62,7 @@ public class WGeoreferencingMap extends GeoReferencing implements IFormControlle
 	/** North configuration panel **/
 	private Label lMaps = new Label();
 	private Button bRefresh = new Button();
-	private Hbox northPanelHbox;
+	private FlexHlayout northPanelHbox;
 	private Listbox mapsCombobox = ListboxFactory.newDropdownListbox();
 	
 	/** South content panel **/
@@ -117,7 +117,7 @@ public class WGeoreferencingMap extends GeoReferencing implements IFormControlle
 		bRefresh.setTooltiptext(Msg.getMsg(Env.getCtx(), "Refresh"));
 		bRefresh.addEventListener(Events.ON_CLICK, this);
 
-		northPanelHbox = new Hbox();
+		northPanelHbox = new FlexHlayout();
 		northPanelHbox.appendChild(lMaps.rightAlign());
 		northPanelHbox.appendChild(mapsCombobox);			
 		northPanelHbox.appendChild(bRefresh);
